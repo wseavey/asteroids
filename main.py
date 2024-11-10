@@ -36,9 +36,11 @@ def main():
     #main game loop
     while True:
         #quitting
+        if Exception == True:
+            return
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return
+                raise Exception
         
         #background
         screen.fill("black")
@@ -54,6 +56,7 @@ def main():
             if asteroid.collisioncheck(player):
                 deathscreen = Textbox(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, DEATH_TEXT)
                 player.pause = True
+                main()
 
             for shot in shots:
                 if asteroid.collisioncheck(shot):
