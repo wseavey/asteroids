@@ -12,6 +12,7 @@ def main():
     #setup screen, text, and clock settings
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    pygame.display.set_caption("Asteroids")
     clock = pygame.time.Clock()
     dt = 0
 
@@ -56,8 +57,7 @@ def main():
             if asteroid.collisioncheck(player):
                 deathscreen = Textbox(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, DEATH_TEXT)
                 player.pause = True
-                main()
-
+                player.gg = True
             for shot in shots:
                 if asteroid.collisioncheck(shot):
                     player.score += 1
@@ -72,6 +72,8 @@ def main():
         #framerate
         if player.pause:
             dt = 0
+            if player.reset:
+                main()
         else:
             dt = clock.tick(60) / 1000
     print("Starting asteroids!")

@@ -8,6 +8,8 @@ class Player(CircleShape):
         self.shoottimer = 0
         self.score = 0
         self.pause = True
+        self.gg = False
+        self.reset = False
 
     # in the player class
     def triangle(self):
@@ -36,10 +38,12 @@ class Player(CircleShape):
             self.move(dt)
         if keys[pygame.K_s]:
             self.move(-dt)
-        if keys[pygame.K_SPACE] and self.pause:
-            self.pause = False
         if keys[pygame.K_SPACE]:
             self.shoot()
+            if self.pause and self.gg:
+                self.reset = True
+            if self.pause:
+                self.pause = False
 
     def move(self, dt):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
